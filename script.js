@@ -1,43 +1,46 @@
 //Criando uma Tabela Para exibir no site
 const produtosPardao = [
-    {nome: 'Notebook', quantidade: 5},
-    {nome: 'Celular', quantidade: 10},
-    {nome: 'TV', quantidade: 6},
-    {nome: 'Micro-ondas', quantidade: 9},
-    {nome: 'Switch de Mesa TP-Link 5 Portas 10/100Mbps - LS1005', quantidade: 1},
-    {nome: 'Notebook', quantidade: 7}
-    ];
+  { id: 1783182968126, nome: 'Notebook', quantidade: 5 },
+  { id: 1683182268123, nome: 'Celular', quantidade: 10 },
+  { id: 7187182768187, nome: 'TV', quantidade: 6 },
+  { id: 2183122948720, nome: 'Micro-ondas', quantidade: 9 },
+  {
+    id: 5783182968126,
+    nome: 'Switch de Mesa TP-Link 5 Portas 10/100Mbps - LS1005',
+    quantidade: 1,
+  },
+  { id: 9703184988127, nome: 'Notebook', quantidade: 7 },
+];
 
 const produtosSalvos = localStorage.getItem('produtos');
 
 let produtos = produtosPardao;
 
-if(produtosSalvos){
-    produtos = JSON.parse(produtosSalvos);
-};
+if (produtosSalvos) {
+  produtos = JSON.parse(produtosSalvos);
+}
 
 //Salvar tabela
-const salvarProduto = () =>{
-    localStorage.setItem('produtos', JSON.stringify(produtos));
+const salvarProduto = () => {
+  localStorage.setItem('produtos', JSON.stringify(produtos));
 };
 tabelaProdutos = document.querySelector('.TabelaProdutos');
 
 //Renderizar Tabela de Produtos
-const renderizarTabela = (tabela) =>{ 
-    const produtosHtml = tabela.map((produtos , i)=>{
-        return `<tr>
-                    <td class="tabelaID">${i}</td>
+const renderizarTabela = (tabela = []) => {
+  const produtosHtml = tabela.map((produtos, i) => {
+    return `<tr>
+                    <td class="tabelaID">${produtos.id}</td>
                     <td>${produtos.nome}</td>
                     <td>${produtos.quantidade}</td>
                     <td class="opcoesTabela">
-                        <button value="${i}" class="editarTabela">Editar</button>
-                        <button value="${i}" class="excluirTabela">Excluir</button>
+                        <button value="${produtos.id}" class="editarTabela">Editar</button>
+                        <button value="${produtos.id}" class="excluirTabela">Excluir</button>
                     </td>
                     </tr>`;
-    });
+  });
 
-    tabelaProdutos.innerHTML = produtosHtml.join('');
-
+  tabelaProdutos.innerHTML = produtosHtml.join('');
 };
 
 renderizarTabela(produtos);
@@ -48,51 +51,113 @@ const formularioAdicionar = document.querySelector('.form-adicionar');
 const inputNome = document.querySelector('.input-nome');
 const inputQuantidade = document.querySelector('.input-quantidade');
 
-botaoAdicionar.addEventListener('click', () =>{
-    formularioAdicionar.classList.toggle('esconder');
-    //if e else em uma unica linha com Ternario
-    formularioAdicionar.classList.contains("esconder") ? botaoAdicionar.textContent = 'Adicionar' : botaoAdicionar.textContent = 'Cancelar';
-
+botaoAdicionar.addEventListener('click', () => {
+  formularioAdicionar.classList.toggle('esconder');
+  //if e else em uma unica linha com Ternario
+  formularioAdicionar.classList.contains('esconder')
+    ? (botaoAdicionar.textContent = 'Adicionar')
+    : (botaoAdicionar.textContent = 'Cancelar');
 });
 
-formularioAdicionar.addEventListener('submit', (event) =>{
-    event.preventDefault();
-    const nome = inputNome.value;
-    const quantidade = inputQuantidade.value;
-    const addProduto = {nome: nome, quantidade: quantidade};
+formularioAdicionar.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const id = Date.now();
+  const nome = inputNome.value.trim();
+  const quantidade = Number(inputQuantidade.value);
+  const addProduto = { id: id, nome: nome, quantidade: quantidade };
 
-    alert('O Produto ' + nome + ' Foi adicionado');
-    produtos.push(addProduto)
+  if (!nome || !quantidade) {
+    return;
+  }
 
-    console.log(produtos);
-    renderizarTabela();
-    salvarProduto();
-    formularioAdicionar.reset();
-})
+  alert('O Produto ' + nome + ' Foi adicionado');
+  produtos.push(addProduto);
+
+  console.log(produtos);
+  renderizarTabela(produtos);
+  salvarProduto();
+  formularioAdicionar.reset();
+});
 
 //filtro na Tabela
 const formularioPesquisar = document.querySelector('.form-peaquisar');
 const inputPesquisa = document.querySelector('.input-pesquisa');
 
-
-formularioPesquisar.addEventListener('submit', (event)=>{
-    event.preventDefault();
-    let busca = inputPesquisa.value;
-    const pesquisaResultado = produtos.filter(({nome}) => nome.toLowerCase().includes(busca.toLowerCase()));
-    renderizarTabela(pesquisaResultado);
-    console.log(pesquisaResultado);
+formularioPesquisar.addEventListener('submit', (event) => {
+  event.preventDefault();
+  let busca = inputPesquisa.value;
+  const pesquisaResultado = produtos.filter(({ nome }) =>
+    nome.toLowerCase().includes(busca.toLowerCase()),
+  );
+  renderizarTabela(pesquisaResultado);
+  console.log(pesquisaResultado);
 });
+
+//Escuta o evento para editar a coluna correspondente
 
 const botaoExcluir = document.querySelector('.excluirTabela');
 
-botaoExcluir.addEventListener('click', ()=> {
-    let excluir = botaoExcluir.value;
+//ESsuta o evento para excluir o intem correspondente na tabela
+document.addEventListener('click', (event) => {
+  if (event.target.closest('.excluirTabela')) {
+    const id = Number(event.target.value);
 
-    produtos.splice(excluir, 1);
-    console.log(excluir);
-    console.log(botaoExcluir);
-    renderizarTabela(produtos)
+    // let excluir = botaoExcluir.value;
+    // produtos.splice(id, 1);
+    produtos = produtos.filter((produtos) => produtos.id !== id);
+    // console.log(excluir);
+    // console.log(botaoExcluir);
+    salvarProduto();
+    renderizarTabela(produtos);
+  }
 });
 
-console.log("Teste");
+document.addEventListener('click', (event) => {
+  if (event.target.closest('.editarTabela')) {
+    const id = Number(event.target.value);
+    const linha = event.target.closest('tr');
+    const produto = produtos.find((produto) => produto.id === id);
+
+    console.log(id);
+    console.log(produtos);
+    console.log(produtos[id]);
+    linha.innerHTML = `
+                    <td class="tabelaID">${id}</td>
+                    <td>
+                        <input type="text" class="editarNome" value="${produto.nome}">
+                    </td>
+                    <td>
+                        <input type="number" class="editarQuantidade" value="${produto.quantidade}">
+                    </td>
+                    <td class="opcoesTabela">
+                        <button class="salvarEdicao" value="${id}">Salvar</button>
+                    </td>`;
+  }
+});
+
+document.addEventListener('click', (event) => {
+  if (event.target.closest('.salvarEdicao')) {
+    const id = Number(event.target.value);
+    const linha = event.target.closest('tr');
+
+    const novoNome = linha.querySelector('.editarNome').value;
+    const novaQuantidade = Number(
+      linha.querySelector('.editarQuantidade').value,
+    );
+
+    const produto = produtos.find((produto) => produto.id === id);
+
+    console.log(id);
+    console.log(produto);
+
+    if (produto) {
+      produto.nome = novoNome;
+      produto.quantidade = novaQuantidade;
+    }
+    salvarProduto();
+    renderizarTabela(produtos);
+  }
+});
+
+console.log('Teste');
 console.log(produtos);

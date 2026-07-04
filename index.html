@@ -12,42 +12,48 @@
         <img src="./Caixa1.png" alt="Um cubo Marrom simbolizando uma caixa">
         <h1>WEB Estoques</h1>
         <nav>
-
+            <button>Estoque</button>
+            <button>Usuarios</button>
+            <button>Sobre</button>
+            <a href="teste.html">Teste</a>
         </nav>
 
     </header>
 
     <main>
-        <hr>
-        <p>Gerenciar Estoque</p>
-        <form action="" class="form-peaquisar"> 
-            <input type="text" placeholder="Pesquisar Nome" class="input-pesquisa">
-            <input type="submit" value="Pesquisar">
-        </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Quantidade</th>
-                </tr>
-            </thead>
-            <tbody class="TabelaProdutos">
+        <section>
+            <h2 class="nomeUsuario">admin</h2>
+            <hr>
+            <p>Gerenciar Estoque</p>
+            <form action="" class="form-peaquisar"> 
+                <input type="text" placeholder="Pesquisar Produto" class="input-pesquisa">
+                <input type="submit" value="Pesquisar">
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody class="TabelaProdutos">
+                    
+                </tbody>
                 
-            </tbody>
-            
-        </table>
-        <hr>
-        <button class="botaoAdicionar">Adicionar</button>
-        <form class="form-adicionar esconder"> 
-            <input type="text" placeholder="Adicionar Produto" class="input-nome">
-            <input type="number" placeholder="Adicionar Quantidade" class="input-quantidade">
-            <input type="submit" value="Adicionar">
-        </form>
+            </table>
+            <hr>
+            <button class="botaoAdicionar">Adicionar</button>
+            <form class="form-adicionar esconder"> 
+                <input type="text" placeholder="Adicionar Produto" class="input-nome">
+                <input type="number" placeholder="Adicionar Quantidade" class="input-quantidade">
+                <input type="submit" value="Adicionar">
+            </form>
+        </section>
         
     </main>
 
-    <footer>
+    <footer class="esconder">
         <p>🄯teste</p>
 
     </footer>
