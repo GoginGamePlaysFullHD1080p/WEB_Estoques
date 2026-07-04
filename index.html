@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEB Estoques</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="Caixa1.png">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./Caixa1.png">
 </head>
 <body>
     <header>
+        <img src="./Caixa1.png" alt="Um cubo Marrom simbolizando uma caixa">
         <h1>WEB Estoques</h1>
         <nav>
 
@@ -17,10 +18,10 @@
     </header>
 
     <main>
-        <p>Teste</p>
-        <button>Adicionar</button>
+        <hr>
+        <p>Gerenciar Estoque</p>
         <form action=""> 
-            <input type="text">
+            <input type="text" placeholder="Pesquisar ID">
             <input type="submit" value="Pesquisar">
         </form>
         <table>
@@ -32,17 +33,24 @@
                 </tr>
             </thead>
             <tbody class="TabelaProdutos">
-
+                
             </tbody>
-
+            
         </table>
-
+        <hr>
+        <button class="botaoAdicionar">Adicionar</button>
+        <form class="form-adicionar esconder"> 
+            <input type="text" placeholder="Adicionar Produto" class="input-nome">
+            <input type="number" placeholder="Adicionar Quantidade" class="input-quantidade">
+            <input type="submit" value="Adicionar">
+        </form>
+        
     </main>
 
     <footer>
         <p>🄯teste</p>
 
     </footer>
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
