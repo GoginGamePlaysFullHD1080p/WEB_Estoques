@@ -1,8 +1,3 @@
-//capturar o nome de usuario utilizado no login
-const nomeLogado = localStorage.getItem('Usuario');
-const nomeExibir = document.querySelector('.nomeUsuario');
-nomeExibir.innerHTML = `${nomeLogado}`;
-
 //Criando uma Tabela Para exibir no site
 const produtosPardao = [
   { id: 1783182968126, nome: 'Notebook', quantidade: 5 },
@@ -11,7 +6,7 @@ const produtosPardao = [
   { id: 2183122948720, nome: 'Micro-ondas', quantidade: 9 },
   {
     id: 5783182968126,
-    nome: 'Switch de Mesa TP-Link 5 Portas 10/100Mbps - LS1005',
+    nome: 'Switch de Mesa Bbox-station 5 Portas 10/100Mbps - LS1005',
     quantidade: 1,
   },
   { id: 9703184988127, nome: 'Notebook', quantidade: 7 },
@@ -97,10 +92,6 @@ formularioPesquisar.addEventListener('submit', (event) => {
   renderizarTabela(pesquisaResultado);
 });
 
-//Escuta o evento para editar a coluna correspondente
-
-const botaoExcluir = document.querySelector('.excluirTabela');
-
 //ESsuta o evento para excluir o intem correspondente na tabela
 document.addEventListener('click', (event) => {
   if (event.target.closest('.excluirTabela')) {
@@ -116,6 +107,7 @@ document.addEventListener('click', (event) => {
   }
 });
 
+//Escuta o evento para editar a coluna correspondente
 document.addEventListener('click', (event) => {
   if (event.target.closest('.editarTabela')) {
     const id = Number(event.target.value);

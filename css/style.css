@@ -55,6 +55,10 @@ td {
   text-align: center;
 }
 
+.tbSenha {
+  -webkit-text-security: disc;
+}
+
 .opcoesTabela {
   background: none;
   padding: 0;

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WEB Estoques</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="icon" href="../img/Caixa1.png" />
+  </head>
+  <body>
+    <header>
+      <img src="./img/Caixa1.png" alt="Um cubo Marrom simbolizando uma caixa" />
+      <h1>WEB Estoques</h1>
+      <nav>
+        <a href="./estoque.html">
+          <button>Estoque</button>
+        </a>
+        <a href="./usuarios.html">
+          <button>Usuarios</button>
+        </a>
+        <a href="./contato.html">
+          <button>Contato</button>
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container">
+        <h2>Envie uma Mensagem para nós</h2>
+        <form action="" class="enviarContato">
+          <label for="">Nome:*</label>
+          <input type="text:" placeholder="Seu nome" required />
+          <label for="">Email:*</label>
+          <input type="email:" placeholder="Seu email" required />
+          <label for="">Mensagem:*</label>
+          <textarea
+            cols="70"
+            rows="10"
+            placeholder="Escreva uma mensagem"
+            required
+          ></textarea>
+          <input type="submit" value="Enviar" class="submit" />
+        </form>
+      </section>
+    </main>
+    <script src="./js/checkLogin.js"></script>
+  </body>
+</html>
