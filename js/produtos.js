@@ -1,3 +1,8 @@
+//capturar o nome de usuario utilizado no login
+const nomeLogado = localStorage.getItem('Usuario');
+const nomeExibir = document.querySelector('.nomeUsuario');
+nomeExibir.innerHTML = `${nomeLogado}`;
+
 //Criando uma Tabela Para exibir no site
 const produtosPardao = [
   { id: 1783182968126, nome: 'Notebook', quantidade: 5 },
@@ -24,22 +29,21 @@ if (produtosSalvos) {
 const salvarProduto = () => {
   localStorage.setItem('produtos', JSON.stringify(produtos));
 };
-tabelaProdutos = document.querySelector('.TabelaProdutos');
 
 //Renderizar Tabela de Produtos
+const tabelaProdutos = document.querySelector('.TabelaProdutos');
 const renderizarTabela = (tabela = []) => {
   const produtosHtml = tabela.map((produtos, i) => {
     return `<tr>
-                    <td class="tabelaID">${produtos.id}</td>
-                    <td>${produtos.nome}</td>
-                    <td>${produtos.quantidade}</td>
-                    <td class="opcoesTabela">
-                        <button value="${produtos.id}" class="editarTabela">Editar</button>
-                        <button value="${produtos.id}" class="excluirTabela">Excluir</button>
-                    </td>
-                    </tr>`;
+              <td class="tabelaID">${produtos.id}</td>
+              <td>${produtos.nome}</td>
+              <td>${produtos.quantidade}</td>
+              <td class="opcoesTabela">
+                  <button value="${produtos.id}" class="editarTabela">Editar</button>
+                  <button value="${produtos.id}" class="excluirTabela">Excluir</button>
+              </td>
+            </tr>`;
   });
-
   tabelaProdutos.innerHTML = produtosHtml.join('');
 };
 
@@ -73,10 +77,11 @@ formularioAdicionar.addEventListener('submit', (event) => {
   alert('O Produto ' + nome + ' Foi adicionado');
   produtos.push(addProduto);
 
-  console.log(produtos);
   renderizarTabela(produtos);
   salvarProduto();
   formularioAdicionar.reset();
+  botaoAdicionar.textContent = 'Adicionar';
+  formularioAdicionar.classList.toggle('esconder');
 });
 
 //filtro na Tabela
@@ -90,7 +95,6 @@ formularioPesquisar.addEventListener('submit', (event) => {
     nome.toLowerCase().includes(busca.toLowerCase()),
   );
   renderizarTabela(pesquisaResultado);
-  console.log(pesquisaResultado);
 });
 
 //Escuta o evento para editar a coluna correspondente
@@ -118,9 +122,6 @@ document.addEventListener('click', (event) => {
     const linha = event.target.closest('tr');
     const produto = produtos.find((produto) => produto.id === id);
 
-    console.log(id);
-    console.log(produtos);
-    console.log(produtos[id]);
     linha.innerHTML = `
                     <td class="tabelaID">${id}</td>
                     <td>
@@ -147,9 +148,6 @@ document.addEventListener('click', (event) => {
 
     const produto = produtos.find((produto) => produto.id === id);
 
-    console.log(id);
-    console.log(produto);
-
     if (produto) {
       produto.nome = novoNome;
       produto.quantidade = novaQuantidade;
@@ -158,6 +156,3 @@ document.addEventListener('click', (event) => {
     renderizarTabela(produtos);
   }
 });
-
-console.log('Teste');
-console.log(produtos);

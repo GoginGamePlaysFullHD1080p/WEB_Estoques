@@ -18,6 +18,10 @@ header h1 {
   padding-left: 5px;
 }
 
+nav a {
+  text-decoration: none;
+}
+
 main {
   background-color: #ffffb3;
   margin: auto;
@@ -31,6 +35,20 @@ td {
   border: 2px solid #8f8f8f;
   border-radius: 25px;
   background-color: #eeeeee;
+}
+
+.nomeUsuario {
+  display: inline;
+}
+
+.sairUsuario {
+  margin-left: 15px;
+  margin-bottom: 5px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border-style: none;
+  background-color: #cc0000;
+  color: #ffffff;
 }
 
 .tabelaID {
